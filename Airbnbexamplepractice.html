@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refined Airbnb Clone</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+            color: #222222;
+            background-color: #FFFFFF;
+        }
+        .container {
+            max-width: 1760px;
+            margin: 0 auto;
+            padding: 0 80px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #EBEBEB;
+        }
+        .logo {
+            color: #c9fe4b;
+            font-size: 32px;
+            font-weight: bold;
+        }
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+        nav span {
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 14px;
+        }
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            padding: 15px 0 25px;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            background-color: #FFFFFF;
+            border: 1px solid #DDDDDD;
+            border-radius: 40px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+            transition: box-shadow 0.2s ease;
+        }
+        .search-container:hover {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+        }
+        .search-item {
+            padding: 14px 32px;
+            border-right: 1px solid #DDDDDD;
+            cursor: pointer;
+        }
+        .search-item:last-child {
+            border-right: none;
+        }
+        .search-item h3 {
+            margin: 0;
+            font-size: 12px;
+            font-weight: 800;
+        }
+        .search-item p {
+            margin: 0;
+            font-size: 14px;
+            color: #717171;
+        }
+        .search-button {
+            background-color: #FF385C;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            margin: 7px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .categories {
+            display: flex;
+            overflow-x: auto;
+            gap: 32px;
+            padding: 20px 0;
+            border-bottom: 1px solid #EBEBEB;
+        }
+        .category {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            min-width: 56px;
+            opacity: 0.64;
+            transition: opacity 0.2s ease;
+        }
+        .category:hover {
+            opacity: 1;
+        }
+        .category svg {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 8px;
+        }
+        .category span {
+            font-size: 12px;
+            color: #717171;
+            text-align: center;
+        }
+        .listings {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            padding: 20px 0;
+        }
+        .listing {
+            position: relative;
+        }
+        .listing img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+        .listing-info h3 {
+            margin: 12px 0 4px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .listing-info p {
+            margin: 0;
+            font-size: 14px;
+            color: #717171;
+        }
+        .share-button {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background-color: white;
+            border-radius: 50%;
+            padding: 8px;
+            cursor: pointer;
+        }
+        .live-tag {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background-color: #222222;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .pagination-dots {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 4px;
+        }
+        .dot {
+            width: 6px;
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">NearU</div>
+            <nav>
+                <span>Stays</span>
+                <span>Experiences</span>
+                <span>Online Experiences</span>
+            </nav>
+            <div class="user-menu">
+                <span>Become a Host</span>
+                <span>🌐</span>
+                <span>👤</span>
+            </div>
+        </header>
+
+        <div class="search-bar">
+            <div class="search-container">
+                <div class="search-item">
+                    <h3>Where</h3>
+                    <p>Search destinations</p>
+                </div>
+                <div class="search-item">
+                    <h3>Check in</h3>
+                    <p>Add dates</p>
+                </div>
+                <div class="search-item">
+                    <h3>Check out</h3>
+                    <p>Add dates</p>
+                </div>
+                <div class="search-item">
+                    <h3>Who</h3>
+                    <p>Add guests</p>
+                </div>
+                <div class="search-button">
+                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style="display:block;fill:none;height:16px;width:16px;stroke:currentColor;stroke-width:4;overflow:visible" aria-hidden="true" role="presentation" focusable="false">
+                        <g fill="none">
+                            <path d="m13 24c6.0751322 0 11-4.9248678 11-11 0-6.07513225-4.9248678-11-11-11-6.07513225 0-11 4.92486775-11 11 0 6.0751322 4.92486775 11 11 11zm8-3 9 9"></path>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="categories">
+            <div class="category">
+                <img src="/api/placeholder/24/24" alt="Icons">
+                <span>Icons</span>
+            </div>
+            <div class="category">
+                <img src="/api/placeholder/24/24" alt="Cabins">
+                <span>Cabins</span>
+            </div>
+            <div class="category">
+                <img src="/api/placeholder/24/24" alt="Beachfront">
+                <span>Beachfront</span>
+            </div>
+            <div class="category">
+                <img src="/api/placeholder/24/24" alt="Amazing pools">
+                <span>Amazing pools</span>
+            </div>
+            <div class="category">
+                <img src="/api/placeholder/24/24" alt="Tropical">
+                <span>Tropical</span>
+            </div>
+            <div class="category">
+                <img src="/api/placeholder/24/24" alt="Countryside">
+                <span>Countryside</span>
+            </div>
+            <div class="category">
+                <img src="/api/placeholder/24/24" alt="OMG!">
+                <span>OMG!</span>
+            </div>
+            <div class="category">
+                <img src="/api/placeholder/24/24" alt="Amazing views">
+                <span>Amazing views</span>
+            </div>
+            <div class="category">
+                <img src="/api/placeholder/24/24" alt="Castles">
+                <span>Castles</span>
+            </div>
+            <div class="category">
+                <img src="/api/placeholder/24/24" alt="Farms">
+                <span>Farms</span>
+            </div>
+            <div class="category">
+                <img src="/api/placeholder/24/24" alt="Off-the-grid">
+                <span>Off-the-grid</span>
+            </div>
+            <div class="category">
+                <img src="/api/placeholder/24/24" alt="Lakefront">
+                <span>Lakefront</span>
+            </div>
+            <div class="category">
+                <img src="/api/placeholder/24/24" alt="Mansions">
+                <span>Mansions</span>
+            </div>
+            <div class="category">
+                <img src="/api/placeholder/24/24" alt="Treehouses">
+                <span>Treehouses</span>
+            </div>
+        </div>
+
+        <div class="listings">
+            <div class="listing">
+                <img src="/api/placeholder/300/300" alt="Train at the X-Mansion">
+                <div class="share-button">↗️</div>
+                <div class="live-tag">LIVE</div>
+                <div class="pagination-dots">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="listing-info">
+                    <h3>Train at the X-Mansion</h3>
+                    <p>Hosted by Jubilee</p>
+                    <p>£30 per guest</p>
+                </div>
+            </div>
+            <div class="listing">
+                <img src="/api/placeholder/300/300" alt="Go VIP with Kevin Hart">
+                <div class="share-button">↗️</div>
+                <div class="pagination-dots">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="listing-info">
+                    <h3>Go VIP with Kevin Hart</h3>
+                    <p>Hosted by Kevin Hart</p>
+                    <p>Coming 21 August</p>
+                </div>
+            </div>
+            <div class="listing">
+                <img src="/api/placeholder/300/300" alt="Join a living room session with Doja">
+                <div class="share-button">↗️</div>
+                <div class="pagination-dots">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="listing-info">
+                    <h3>Join a living room session with Doja</h3>
+                    <p>Hosted by Doja Cat</p>
+                    <p>Coming October</p>
+                </div>
+            </div>
+            <div class="listing">
+                <img src="/api/placeholder/300/300" alt="Stay in Prince's Purple Rain house">
+                <div class="share-button">↗️</div>
+                <div class="pagination-dots">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="listing-info">
+                    <h3>Stay in Prince's Purple Rain house</h3>
+                    <p>Hosted by Wendy and Lisa</p>
+                    <p>Coming October</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
